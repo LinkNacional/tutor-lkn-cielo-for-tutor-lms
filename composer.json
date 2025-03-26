@@ -1,0 +1,27 @@
+{
+    "name": "lkn/lkn-cielo-for-tutor-lms-file",
+    "type": "project",
+    "license": "Proprietary",
+    "autoload": {
+        "psr-4": {
+            "Lkn\\lknCieloForTutorLms\\Includes\\": "Includes/",
+            "Lkn\\lknCieloForTutorLms\\Admin\\": "Admin/",
+            "Lkn\\lknCieloForTutorLms\\PublicView\\": "Public/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Link Nacional",
+            "email": "ticket@linknacional.com"
+        }
+    ],
+    "minimum-stability": "stable",
+    "require-dev": {
+        "phan/phan": "5.4.1"
+    },
+    "config": {
+        "allow-plugins": {
+            "composer/installers": true
+        }
+    }
+}
