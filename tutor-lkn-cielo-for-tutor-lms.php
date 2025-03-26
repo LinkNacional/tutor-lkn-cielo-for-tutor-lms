@@ -25,9 +25,9 @@
  * Domain Path:       /languages
  */
 
+
 // If this file is called directly, abort.
 if ( ! defined( 'WPINC' ) ) {
 	die;
 }
-
-require_once 'lkn-cielo-for-tutor-lms-file.php';
+require_once 'tutor-lkn-cielo-for-tutor-lms-file.php';

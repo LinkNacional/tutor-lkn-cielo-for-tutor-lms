@@ -17,7 +17,26 @@ if (! defined('WPINC')) {
 
 require_once __DIR__ . '/vendor/autoload.php';
 
-define( 'LKN_CIELO_FOR_TUTOR_LMS_VERSION', '1.0.0' );
+
+if ( ! defined('LKN_CIELO_FOR_TUTOR_LMS_VERSION')) {
+	define( 'LKN_CIELO_FOR_TUTOR_LMS_VERSION', '1.0.0' );
+}
+
+if ( ! defined('LKN_CIELO_FOR_TUTOR_LMS_FILE')) {
+    define('LKN_CIELO_FOR_TUTOR_LMS_FILE', __DIR__ . '/rede-for-woocommerce-pro.php');
+}
+
+if ( ! defined('LKN_CIELO_FOR_TUTOR_LMS_DIR')) {
+    define('LKN_CIELO_FOR_TUTOR_LMS_DIR', plugin_dir_path(LKN_CIELO_FOR_TUTOR_LMS_FILE));
+}
+
+if ( ! defined('LKN_CIELO_FOR_TUTOR_LMS_DIR_URL')) {
+    define('LKN_CIELO_FOR_TUTOR_LMS_DIR_URL', plugin_dir_url(LKN_CIELO_FOR_TUTOR_LMS_FILE));
+}
+
+if ( ! defined('LKN_CIELO_FOR_TUTOR_LMS_BASENAME')) {
+    define('LKN_CIELO_FOR_TUTOR_LMS_BASENAME', plugin_basename(LKN_CIELO_FOR_TUTOR_LMS_FILE));
+}
 
 /**
  * The code that runs during plugin activation.

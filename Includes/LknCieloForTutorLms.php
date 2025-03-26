@@ -31,6 +31,7 @@ namespace Lkn\lknCieloForTutorLms\Includes;
 
 use Lkn\lknCieloForTutorLms\Admin\LknCieloForTutorLmsAdmin;
 use Lkn\lknCieloForTutorLms\PublicView\LknCieloForTutorLmsPublic;
+use Payments\Custom\LknCieloForTutorLmsGateway;
 
 class LknCieloForTutorLms {
 
@@ -161,10 +162,9 @@ class LknCieloForTutorLms {
 		$this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'enqueue_styles' );
 		$this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'enqueue_scripts' );
 		
-		$this->loader->add_filter( 'tutor_gateways_with_class', $this->LknCieloForTutorLmsHelperClass, 'addWebhook');
+		$this->loader->add_filter( 'tutor_gateways_with_class', $this->LknCieloForTutorLmsHelperClass, 'addWebhook', 10, 2);
 		$this->loader->add_filter( 'tutor_payment_gateways_with_class', $this->LknCieloForTutorLmsHelperClass, 'addGateway');
 		$this->loader->add_filter( 'tutor_payment_gateways', $this->LknCieloForTutorLmsHelperClass, 'setConfigs');
-	
 	}
 
 	/**
