@@ -8,7 +8,7 @@ class LknCieloForTutorLmsHelper{
             'name' => 'lkn-cielo-for-tutor-lms',
             'label' => 'Cielo Checkout',
             'is_installed' => true,
-            'is_active' => true,
+            'is_active' => false,
             'icon' => '', // Icon url.
             'support_subscription' => false,
             'fields' => array(
@@ -17,6 +17,22 @@ class LknCieloForTutorLmsHelper{
                     'type' => 'secret_key',
                     'label' => 'Cielo MerchantId',
                     'value' => '',
+                ),
+                array(
+                    'name' => 'webhook_url',
+                    'type' => 'webhook_url',
+                    'label' => 'Webhook URL',
+                    'value' => '',
+                ),
+                array(
+                    'name' => 'reg_logs',
+                    'type' => 'select',
+                    'label' => 'Depuração',
+                    'options' => array(
+                        'disabled' => 'Desativado',
+                        'enabled' => 'Ativado',
+                    ),
+                    'value' => 'disabled',
                 ),
             ),
         );

@@ -23,7 +23,7 @@ class LknCieloForTutorLmsGateway extends BasePayment
 	 */
 	public function check(): bool
 	{
-		$configKeys = Arr::make(['merchant_id']);
+		$configKeys = Arr::make(['merchant_id', 'reg_logs']);
 
 		$isConfigOk = $configKeys->every(function ($key) {
 			return $this->config->has($key) && !empty($this->config->get($key));
@@ -47,7 +47,7 @@ class LknCieloForTutorLmsGateway extends BasePayment
 	public function setup(): void
 	{
 		try {
-			$this->client = "{$this->config->get('merchant_id')}";
+			$this->client = "{$this->config->get('merchant_id')}:{$this->config->get('reg_logs')}";
 		} catch (Throwable $error) {
 			throw $error;
 		}
@@ -109,79 +109,77 @@ class LknCieloForTutorLmsGateway extends BasePayment
 		try {
 			$merchant_id   = $this->config->get('merchant_id');
 			$payment_data = $this->getData();
-			$orderNumber = uniqid() . '::' . $payment_data->order_id;
-			$description = $payment_data->order_description;
+			$orderNumber = $payment_data->order_id;
 			$itemName = $payment_data->item_name;
-			$totalPrice = $payment_data->total_price;
+			$totalPrice = (int) round($payment_data->total_price * 100);
 			$customerName = $payment_data->customer->name;
 			$customerEmail = $payment_data->customer->email;
+			$itemName = $payment_data->items->{'0'}['item_name'];
+
+			$headers = array(
+				'Content-Type' => 'application/json',
+				'MerchantId' => $merchant_id,
+			);
+
+			$body = array(
+				'OrderNumber' => $orderNumber,
+				'SoftDescriptor' => 'cieloTutorLms',
+				'Cart' => array(
+					'Items' => array(
+						array(
+							'Name' => $itemName,
+							'UnitPrice' => $totalPrice,
+							'Quantity' => 1,
+							'Type' => 'Digital',
+						),
+					),
+				),
+				'Shipping' => array(
+					'Type' => 'WithoutShipping',
+				),
+				'Customer' => array(
+					'FullName' => $customerName,
+					'Email' => $customerEmail,
+				),
+				'Options' => array(
+                    'ReturnUrl' => site_url("?tutor_order_placement=success&order_id=" . $payment_data->order_id)
+                )
+			);
 
 			$result = wp_remote_post(
 				'https://cieloecommerce.cielo.com.br/api/public/v1/orders/',
 				array(
-					'headers' => array(
-						'Content-Type' => 'application/json',
-						'MerchantId' => $merchant_id,
-					),
-					'body' => json_encode(array(
-						'OrderNumber' => $orderNumber,
-						'SoftDescriptor' => $description,
-						'Cart' => array(
-							'Items' => array(
-								array(
-									'Name' => $itemName,
-									'UnitPrice' => $totalPrice,
-									'Quantity' => 1,
-									'Type' => 'Digital',
-								),
-							),
-						),
-						'Shipping' => array(
-							'Type' => 'WithoutShipping',
-						),
-						'Customer' => array(
-							'FullName' => $customerName,
-							'Email' => $customerEmail,
-						)
-					))
+					'headers' => $headers,
+					'body' => json_encode($body)
 				)
 			);
 
+			if($this->config->get('reg_logs') == 'enabled'){
+				$log_dir = __DIR__ . '/logs/';
+				if (!file_exists($log_dir)) {
+					mkdir($log_dir, 0755, true);
+				}
+
+				$log_file = $log_dir . 'logCreatePayment-' . date('Y-m-d_H-i-s') . '.json';
+				$log_data = json_encode([
+					'url' => 'https://cieloecommerce.cielo.com.br/api/public/v1/orders/',
+					'headers' => $headers,
+					'body' => $body,
+					'result' => $result
+				]);
+
+				file_put_contents($log_file, $log_data);
+			}
+
 			$resultObj = wp_remote_retrieve_body($result);
-			/* add_option('teste requisição' . uniqid(), json_encode(array(
-				'payment_data' => $payment_data,
-				'headers' => array(
-					'Content-Type' => 'application/json',
-					'MerchantId' => $merchant_id,
-				),
-				'body' => json_encode(array(
-					'OrderNumber' => $orderNumber,
-					'SoftDescriptor' => $description,
-					'Cart' => array(
-						'Items' => array(
-							array(
-								'Name' => $itemName,
-								'UnitPrice' => $totalPrice,
-								'Quantity' => 1,
-								'Type' => 'Digital',
-							),
-						),
-					),
-					'Shipping' => array(
-						'Type' => 'WithoutShipping',
-					),
-					'Customer' => array(
-						'FullName' => $customerName,
-						'Email' => $customerEmail,
-					)
-				)),
-				'result' => $result,
-				'resultObj' => $resultObj
-			))); */
-			throw new ErrorException(json_encode($payment_data->items->{'0'}));
+
+			if (isset($resultObj->settings->checkoutUrl) && ! empty($resultObj->settings->checkoutUrl)) {
+				$checkoutUrl = $resultObj->settings->checkoutUrl;
+				header('Location: ' . $checkoutUrl);
+				exit();
+            }
 			
-			header("Location: https://linknacional.com.br");
-			exit();
+			throw new ErrorException('Erro ao gerar pagamento. Tente novamente mais tarde.');
 		} catch (RequestException $error) {
 			throw new ErrorException($error->getResponse()->getBody());
 		}
@@ -210,32 +208,31 @@ class LknCieloForTutorLmsGateway extends BasePayment
 	 */
 	public function verifyAndCreateOrderData(object $payload): object
 	{
-		// As informações da variável `$_GET` que contém dados da string de consulta da URL (ou seja, parâmetros anexados à URL em uma solicitação GET).
-		$get_data   = $payload->get;
-
 		// As informações da variável $_POST que contém dados enviados via uma solicitação HTTP POST.
 		$post_data  = $payload->post;
-
-		// As informações da variável $_SERVER que contém informações sobre o ambiente do servidor e cabeçalhos da solicitação.
-		$server_variables = $payload->server;
-
-		// É um stream PHP que permite acesso aos dados brutos do POST (sem análise).
-		$stream = $payload->stream;
 
 		$returnData = System::defaultOrderData();
 
 		try {
+			$returnData->id = $post_data['order_number'];
+			$returnData->transaction_id = $post_data['checkout_cielo_order_number'];
 
-			// Valida as verificações necessárias com base nas preferências do gateway de pagamento para garantir que as informações do $payload estejam vindo do gateway de pagamento fornecido.
+			switch ($post_data['payment_status']) {
+				case '2':
+					$returnData->payment_status = 'paid';
+					break;
+				
+				case '3':
+				case '4':
+				case '5':
+				case '6':
+					$returnData->payment_status = 'failed';
+					break;
 
-			// Em seguida, define o objeto `$returnData` com os dados aplicáveis do objeto `payload` e o retorna para o Tutor.
-			$returnData->id 					= '';
-			$returnData->payment_status 		= '';
-			$returnData->payment_error_reason 	= '';
-			$returnData->transaction_id 		= '';
-			$returnData->payment_payload 		= '';
-			$returnData->fees 					= '';
-			$returnData->earnings 				= '';
+				default:
+					$returnData->payment_status = 'failed';
+					break;
+			}
 
 			return $returnData;
 		} catch (Throwable $error) {

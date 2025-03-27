@@ -46,13 +46,8 @@ class LknCieloForTutorLmsGatewayConfig extends Config implements ConfigContract 
 		}
 	}
 
-	public function getMerchantId(): string {
-		return $this->merchant_id;
-	}
-
-
 	public function is_configured() {
-		return $this->merchant_id;
+		return $this->merchant_id && $this->reg_logs;
 	}
 
 	/**
@@ -63,6 +58,7 @@ class LknCieloForTutorLmsGatewayConfig extends Config implements ConfigContract 
 	{
 		return array(
 			'merchant_id'  => 'merchant_id',
+			'reg_logs'  => 'reg_logs'
 		);
 	}
 
@@ -76,7 +72,10 @@ class LknCieloForTutorLmsGatewayConfig extends Config implements ConfigContract 
 		parent::createConfig();
 
 		// Update the configuration if the gateway requires additional fields beyond the default ones.
-		$config = ['merchant_id' => $this->getMerchantId()];
+		$config = [
+			'merchant_id' => $this->merchant_id,
+			'reg_logs' => $this->reg_logs
+		];
 		$this->updateConfig($config);
 	}
 }
