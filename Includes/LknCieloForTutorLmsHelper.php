@@ -9,7 +9,7 @@ class LknCieloForTutorLmsHelper{
             'label' => 'Cielo Checkout',
             'is_installed' => true,
             'is_active' => false,
-            'icon' => '', // Icon url.
+            'icon' => LKN_CIELO_FOR_TUTOR_LMS_DIR_URL . '/Public/images/cieloIcon.png',
             'support_subscription' => false,
             'fields' => array(
                 array(
@@ -27,7 +27,7 @@ class LknCieloForTutorLmsHelper{
                 array(
                     'name' => 'reg_logs',
                     'type' => 'select',
-                    'label' => 'Depuração',
+                    'label' => 'Log e Depuração',
                     'options' => array(
                         'disabled' => 'Desativado',
                         'enabled' => 'Ativado',
@@ -67,5 +67,39 @@ class LknCieloForTutorLmsHelper{
         }
 
         return $value;
+    }
+
+    final public static function get_contents($url) {
+        try {
+            $args = array(
+                'headers' => array(), // Cabeçalhos HTTP personalizados
+                'timeout' => 30, // Tempo limite da requisição em segundos
+                'redirection' => 5, // Número máximo de redirecionamentos ao fazer uma solicitação HTTP
+            );
+            
+            $data = wp_remote_get($url, $args);
+
+            if (is_wp_error($data)) {
+                $error_message = $data->get_error_message();
+            } else {
+                $body = wp_remote_retrieve_body($data);
+                $http_code = wp_remote_retrieve_response_code($data);
+            }
+            return $body;
+        } catch(Exception $error) {
+            return $error->getMessage();
+        }
+    }
+
+    final public static function get_exchange_rates($currencyCode) {
+        $cotacao = LknCieloForTutorLmsHelper::get_contents('https://api.linknacional.com/cotacao/cotacao-' . $currencyCode . '.json');
+
+        $cotacao = json_decode($cotacao, true);
+
+        if (isset($cotacao['rates']['BRL'])) {
+            return $cotacao['rates']['BRL'];
+        }
+
+        return 1;
     }
 }

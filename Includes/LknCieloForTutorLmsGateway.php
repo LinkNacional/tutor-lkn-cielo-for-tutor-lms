@@ -115,6 +115,13 @@ class LknCieloForTutorLmsGateway extends BasePayment
 			$customerName = $payment_data->customer->name;
 			$customerEmail = $payment_data->customer->email;
 			$itemName = $payment_data->items->{'0'}['item_name'];
+			$currencyCode = $this->data->currency->code;
+
+			if ('BRL' !== $currencyCode) {
+                $exRate = LknCieloForTutorLmsHelper::get_exchange_rates($currencyCode);
+                $totalPrice = ($totalPrice / 100) * $exRate;
+				$totalPrice = round($totalPrice * 100);
+            }
 
 			$headers = array(
 				'Content-Type' => 'application/json',
@@ -165,7 +172,7 @@ class LknCieloForTutorLmsGateway extends BasePayment
 					'url' => 'https://cieloecommerce.cielo.com.br/api/public/v1/orders/',
 					'headers' => $headers,
 					'body' => $body,
-					'result' => $result
+					'result' => $result,
 				]);
 
 				file_put_contents($log_file, $log_data);
@@ -240,7 +247,7 @@ class LknCieloForTutorLmsGateway extends BasePayment
 					mkdir($log_dir, 0755, true);
 				}
 	
-				$log_file = $log_dir . 'logCreatePayment-' . date('Y-m-d_H-i-s') . '.json';
+				$log_file = $log_dir . 'logWebhook-' . date('Y-m-d_H-i-s') . '.json';
 				$log_data = json_encode([
 					'post_data' => $post_data,
 					'returnData' => $returnData
