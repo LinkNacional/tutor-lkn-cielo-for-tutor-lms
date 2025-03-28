@@ -31,6 +31,7 @@ namespace Lkn\lknCieloForTutorLms\Includes;
 
 use Lkn\lknCieloForTutorLms\Admin\LknCieloForTutorLmsAdmin;
 use Lkn\lknCieloForTutorLms\PublicView\LknCieloForTutorLmsPublic;
+use Lkn_Puc_Plugin_UpdateChecker;
 use Payments\Custom\LknCieloForTutorLmsGateway;
 
 class LknCieloForTutorLms {
@@ -87,7 +88,7 @@ class LknCieloForTutorLms {
 		$this->set_locale();
 		$this->define_admin_hooks();
 		$this->define_public_hooks();
-
+		$this->updater_init();
 	}
 
 	/**
@@ -142,6 +143,7 @@ class LknCieloForTutorLms {
 
 		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_styles' );
 		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_scripts' );
+        $this->loader->add_filter( 'plugin_action_links_' . LKN_CIELO_FOR_TUTOR_LMS_BASENAME, $this, 'addSettings', 10, 2);
         
 		
 		
@@ -207,4 +209,23 @@ class LknCieloForTutorLms {
 		return $this->version;
 	}
 
+	private function updater_init() {
+        include_once __DIR__ . '/plugin-updater/plugin-update-checker.php';
+
+        return new Lkn_Puc_Plugin_UpdateChecker(
+            'https://api.linknacional.com/v2/u/?slug=tutor-lkn-cielo-for-tutor-lms',
+            LKN_CIELO_FOR_TUTOR_LMS_FILE,
+            'tutor-lkn-cielo-for-tutor-lms'
+        );
+    }
+
+	public static function addSettings($plugin_meta, $plugin_file) {
+        $new_meta_links['setting'] = sprintf(
+            '<a href="%1$s">%2$s</a>',
+            admin_url('admin.php?page=tutor_settings&tab_page=ecommerce_payment'),
+            __('Settings', 'woocommerce')
+        );
+
+        return array_merge($plugin_meta, $new_meta_links);
+    }
 }

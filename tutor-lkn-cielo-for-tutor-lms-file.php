@@ -23,7 +23,7 @@ if ( ! defined('LKN_CIELO_FOR_TUTOR_LMS_VERSION')) {
 }
 
 if ( ! defined('LKN_CIELO_FOR_TUTOR_LMS_FILE')) {
-    define('LKN_CIELO_FOR_TUTOR_LMS_FILE', __DIR__ . '/rede-for-woocommerce-pro.php');
+    define('LKN_CIELO_FOR_TUTOR_LMS_FILE', __DIR__ . '/tutor-lkn-cielo-for-tutor-lms.php');
 }
 
 if ( ! defined('LKN_CIELO_FOR_TUTOR_LMS_DIR')) {
