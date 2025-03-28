@@ -234,6 +234,21 @@ class LknCieloForTutorLmsGateway extends BasePayment
 					break;
 			}
 
+			if($this->config->get('reg_logs') == 'enabled'){
+				$log_dir = __DIR__ . '/logs/';
+				if (!file_exists($log_dir)) {
+					mkdir($log_dir, 0755, true);
+				}
+	
+				$log_file = $log_dir . 'logCreatePayment-' . date('Y-m-d_H-i-s') . '.json';
+				$log_data = json_encode([
+					'post_data' => $post_data,
+					'returnData' => $returnData
+				]);
+	
+				file_put_contents($log_file, $log_data);
+			}
+
 			return $returnData;
 		} catch (Throwable $error) {
 			throw $error;
