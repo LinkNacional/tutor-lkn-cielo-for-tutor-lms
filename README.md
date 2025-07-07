@@ -1,4 +1,4 @@
-# fraud-detection-for-woocommerce
+# Plugin CIELO CHeckout com PIX Boleto Cartão de Crédito para TUTOR
 
 ## Requisitos e suporte
 - PHP: 7.4
