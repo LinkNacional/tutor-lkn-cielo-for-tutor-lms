@@ -22,6 +22,7 @@
  * License:           GPL-3.0+
  * License URI:       http://www.gnu.org/licenses/gpl-2.0.txt
  * Text Domain:       tutor-lkn-cielo-for-tutor-lms
+ * Requires Plugins:  tutor
  * Domain Path:       /languages
  */
 
