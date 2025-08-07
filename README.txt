@@ -1,4 +1,4 @@
-=== Cielo For Tutor LMS ===
+=== Cielo For Tutor Lms ===
 Contributors: linknacional
 Donate link: https://www.linknacional.com.br/wordpress/
 Tags: tutorlms, tutor, payment, pix, cielo
