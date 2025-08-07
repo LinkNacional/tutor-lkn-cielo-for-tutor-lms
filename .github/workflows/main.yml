@@ -41,6 +41,7 @@ jobs:
           trademarked_term
           textdomain_mismatch
           hidden_files
+          blocking_script
         categories: |
           performance
           accessibility
