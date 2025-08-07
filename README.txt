@@ -30,15 +30,13 @@ This plugin uses the Cielo API 3.0 to process payments. [terms of service](https
 
 1. Go to Tutor LMS settings menu;
 
-2. Select the 'Payments' option and search for 'Cielo Checkout';
+2. Select the 'Payment Methods' option and search for 'Cielo Checkout';
 
 3. Enter all necessary credentials for the payment gateway;
 
 4. Configure the payment settings according to your needs;
 
 5. Students can now enroll in courses using Cielo Checkout payment method;
-
-6. Upon successful payment, students will be automatically enrolled in the purchased course.
 
 == Installation ==
 
@@ -52,7 +50,7 @@ This plugin uses the Cielo API 3.0 to process payments. [terms of service](https
 
 5. Now go to Tutor LMS settings menu;
 
-6. Select the 'Payments' option and search for 'Cielo Checkout';
+6. Select the 'Payment Methods' option and search for 'Cielo Checkout';
 
 7. Enter all necessary credentials for the payment gateway;
 
@@ -72,10 +70,6 @@ This plugin uses the Cielo API 3.0 to process payments. [terms of service](https
 = Does this plugin support recurring payments for course subscriptions? =
 
 * Currently, this plugin supports one-time payments for course enrollment. Recurring payment features may be available in future versions.
-
-= Can I customize the checkout experience? =
-
-* The plugin uses Cielo Checkout, which provides a standardized and secure checkout experience. Customization options are limited to what Cielo Checkout supports.
 
 == Changelog ==
 
