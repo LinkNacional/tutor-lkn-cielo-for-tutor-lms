@@ -1,114 +1,95 @@
-=== Plugin Name ===
-Contributors: (this should be a list of wordpress.org userid's)
-Donate link: https://linknacional.com.br/
-Tags: comments, spam
-Requires at least: 3.0.1
-Tested up to: 3.4
-Stable tag: 4.3
-License: GPLv2 or later
-License URI: http://www.gnu.org/licenses/gpl-2.0.html
+=== Cielo For Tutor LMS ===
+Contributors: linknacional
+Donate link: https://www.linknacional.com.br/wordpress/lifterlms/
+Tags: lifterlms, payment, paymethod, cielo, checkout
+Requires at least: 5.7
+Tested up to: 6.8
+Stable tag: 1.0.1
+Requires PHP: 7.2
+License: GPLv3 or later
+License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
-Here is a short description of the plugin.  This should be no more than 150 characters.  No markup here.
+Payment Gateway for Cielo API on Tutor LMS.
 
 == Description ==
 
-This is the long description.  No limit, and you can use Markdown (as well as in the following sections).
+The **Cielo Payment Gateway for Tutor LMS** is a payment plugin that allows you to integrate your online learning platform with Cielo, one of Brazil's leading payment solutions. With this plugin, you can offer your students the ability to pay for courses using **Cielo Checkout**, ensuring secure and fast transactions.
 
-For backwards compatibility, if this section is missing, the full length of the short description will be used, and
-Markdown parsed.
+**Main Features:**
+- Integration with **Cielo Checkout** for secure payment processing;
+- Seamless integration with Tutor LMS course enrollment system;
+- Intuitive configuration directly in Tutor LMS;
 
-A few notes about the sections above:
+**Dependencies**
 
-*   "Contributors" is a comma separated list of wp.org/wp-plugins.org usernames
-*   "Tags" is a comma separated list of tags that apply to the plugin
-*   "Requires at least" is the lowest version that the plugin will work on
-*   "Tested up to" is the highest version that you've *successfully used to test the plugin*. Note that it might work on
-higher versions... this is just the highest one you've verified.
-*   Stable tag should indicate the Subversion "tag" of the latest stable version, or "trunk," if you use `/trunk/` for
-stable.
+Cielo Payment Gateway for Tutor LMS plugin is dependent on [Tutor LMS](https://www.linknacional.com.br/wordpress/lifterlms/) plugin, please make sure Tutor LMS is installed and properly configured before starting Cielo Payment Gateway for Tutor LMS installation.
 
-    Note that the `readme.txt` of the stable tag is the one that is considered the defining one for the plugin, so
-if the `/trunk/readme.txt` file says that the stable tag is `4.3`, then it is `/tags/4.3/readme.txt` that'll be used
-for displaying information about the plugin.  In this situation, the only thing considered from the trunk `readme.txt`
-is the stable tag pointer.  Thus, if you develop in trunk, you can update the trunk `readme.txt` to reflect changes in
-your in-development version, without having that information incorrectly disclosed about the current stable version
-that lacks those changes -- as long as the trunk's `readme.txt` points to the correct stable tag.
+This plugin uses the Cielo API 3.0 to process payments. [terms of service](https://www.cielo.com.br/termos-condicoes-de-uso/) and [privacy policy](https://ri.cielo.com.br/estatuto-social-e-politicas-old/politica-de-privacidade-de-dados/).
 
-    If no stable tag is provided, it is assumed that trunk is stable, but you should specify "trunk" if that's where
-you put the stable version, in order to eliminate any doubt.
+**User instructions**
+
+1. Go to Tutor LMS settings menu;
+
+2. Select the 'Payments' option and search for 'Cielo Checkout';
+
+3. Enter all necessary credentials for the payment gateway;
+
+4. Configure the payment settings according to your needs;
+
+5. Students can now enroll in courses using Cielo Checkout payment method;
+
+6. Upon successful payment, students will be automatically enrolled in the purchased course.
 
 == Installation ==
 
-This section describes how to install the plugin and get it working.
+1. Look in the sidebar for the WordPress plugins area;
 
-e.g.
+2. In installed plugins look for the option 'add new';
 
-1. Upload `lkn-cielo-for-tutor-lms.php` to the `/wp-content/plugins/` directory
-1. Activate the plugin through the 'Plugins' menu in WordPress
-1. Place `<?php do_action('plugin_name_hook'); ?>` in your templates
+3. Click on the 'send plugin' option in the page title and upload the tutor-lkn-cielo-for-tutor-lms.zip plugin;
+
+4. Click on the 'install now' button and then activate the installed plugin;
+
+5. Now go to Tutor LMS settings menu;
+
+6. Select the 'Payments' option and search for 'Cielo Checkout';
+
+7. Enter all necessary credentials for the payment gateway;
+
+8. Configure your payment settings and save.
 
 == Frequently Asked Questions ==
 
-= A question that someone might have =
+= What is the plugin license? =
 
-An answer to that question.
+* This plugin is released under a GPL license.
 
-= What about foo bar? =
+= What is needed to use this plugin? =
 
-Answer to foo bar dilemma.
+* Tutor LMS version 3.0 or later installed and active;
+* Cielo API 3.0 credentials.
 
-== Screenshots ==
+= Does this plugin support recurring payments for course subscriptions? =
 
-1. This screen shot description corresponds to screenshot-1.(png|jpg|jpeg|gif). Note that the screenshot is taken from
-the /assets directory or the directory that contains the stable readme.txt (tags or trunk). Screenshots in the /assets
-directory take precedence. For example, `/assets/screenshot-1.png` would win over `/tags/4.3/screenshot-1.png`
-(or jpg, jpeg, gif).
-2. This is the second screen shot
+* Currently, this plugin supports one-time payments for course enrollment. Recurring payment features may be available in future versions.
+
+= Can I customize the checkout experience? =
+
+* The plugin uses Cielo Checkout, which provides a standardized and secure checkout experience. Customization options are limited to what Cielo Checkout supports.
 
 == Changelog ==
 
-= 1.0 =
-* A change since the previous version.
-* Another change.
+= 1.0.1 =
+** 07/08/2025**
+* Remoção do plugin updater.
 
-= 0.5 =
-* List versions from most recent at top to oldest at bottom.
+= 1.0.0 =
+* Plugin launch.
 
 == Upgrade Notice ==
 
-= 1.0 =
-Upgrade notices describe the reason a user should upgrade.  No more than 300 characters.
+= 1.0.1 =
+* Remoção do plugin updater.
 
-= 0.5 =
-This version fixes a security related bug.  Upgrade immediately.
-
-== Arbitrary section ==
-
-You may provide arbitrary sections, in the same format as the ones above.  This may be of use for extremely complicated
-plugins where more information needs to be conveyed that doesn't fit into the categories of "description" or
-"installation."  Arbitrary sections will be shown below the built-in sections outlined above.
-
-== A brief Markdown Example ==
-
-Ordered list:
-
-1. Some feature
-1. Another feature
-1. Something else about the plugin
-
-Unordered list:
-
-* something
-* something else
-* third thing
-
-Here's a link to [WordPress](http://wordpress.org/ "Your favorite software") and one to [Markdown's Syntax Documentation][markdown syntax].
-Titles are optional, naturally.
-
-[markdown syntax]: http://daringfireball.net/projects/markdown/syntax
-            "Markdown is what the parser uses to process much of the readme file"
-
-Markdown uses email style notation for blockquotes and I've been told:
-> Asterisks for *emphasis*. Double it up  for **strong**.
-
-`<?php code(); // goes in backticks ?>`
+= 1.0.0 =
+* Plugin launch.

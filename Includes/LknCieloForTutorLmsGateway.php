@@ -161,21 +161,31 @@ class LknCieloForTutorLmsGateway extends BasePayment
 				)
 			);
 
-			if($this->config->get('reg_logs') == 'enabled'){
-				$log_dir = __DIR__ . '/logs/';
-				if (!file_exists($log_dir)) {
-					mkdir($log_dir, 0755, true);
+			if ( $this->config->get( 'reg_logs' ) === 'enabled' ) {
+				global $wp_filesystem;
+
+				if ( ! function_exists( 'request_filesystem_credentials' ) ) {
+					require_once ABSPATH . 'wp-admin/includes/file.php';
 				}
 
-				$log_file = $log_dir . 'logCreatePayment-' . date('Y-m-d_H-i-s') . '.json';
-				$log_data = json_encode([
-					'url' => 'https://cieloecommerce.cielo.com.br/api/public/v1/orders/',
-					'headers' => $headers,
-					'body' => $body,
-					'result' => $result,
-				]);
-
-				file_put_contents($log_file, $log_data);
+				if ( WP_Filesystem( $creds ) && ! ( false === ( $creds = request_filesystem_credentials( '', '', false, false, null ) ) ) ) {
+					$log_dir = __DIR__ . '/logs/';
+	
+					if ( ! $wp_filesystem->is_dir( $log_dir ) ) {
+						$wp_filesystem->mkdir( $log_dir );
+					}
+	
+					$log_file = $log_dir . 'logCreatePayment-' . gmdate( 'Y-m-d_H-i-s' ) . '.json';
+	
+					$log_data = json_encode( [
+						'url'     => 'https://cieloecommerce.cielo.com.br/api/public/v1/orders/',
+						'headers' => $headers,
+						'body'    => $body,
+						'result'  => $result,
+					] );
+	
+					$wp_filesystem->put_contents( $log_file, $log_data, FS_CHMOD_FILE );
+				}
 			}
 
 			$resultObj = wp_remote_retrieve_body($result);
@@ -188,7 +198,7 @@ class LknCieloForTutorLmsGateway extends BasePayment
 			
 			throw new ErrorException('Erro ao gerar pagamento. Tente novamente mais tarde.');
 		} catch (RequestException $error) {
-			throw new ErrorException($error->getResponse()->getBody());
+			throw new ErrorException(esc_html($error->getResponse()->getBody()));
 		}
 	}
 
@@ -241,20 +251,31 @@ class LknCieloForTutorLmsGateway extends BasePayment
 					break;
 			}
 
-			if($this->config->get('reg_logs') == 'enabled'){
-				$log_dir = __DIR__ . '/logs/';
-				if (!file_exists($log_dir)) {
-					mkdir($log_dir, 0755, true);
+			if ( $this->config->get( 'reg_logs' ) === 'enabled' ) {
+				global $wp_filesystem;
+
+				if ( ! function_exists( 'request_filesystem_credentials' ) ) {
+					require_once ABSPATH . 'wp-admin/includes/file.php';
 				}
+
+				if ( WP_Filesystem( $creds ) && ! ( false === ( $creds = request_filesystem_credentials( '', '', false, false, null ) ) ) ) {
+					$log_dir = __DIR__ . '/logs/';
 	
-				$log_file = $log_dir . 'logWebhook-' . date('Y-m-d_H-i-s') . '.json';
-				$log_data = json_encode([
-					'post_data' => $post_data,
-					'returnData' => $returnData
-				]);
+					if ( ! $wp_filesystem->is_dir( $log_dir ) ) {
+						$wp_filesystem->mkdir( $log_dir );
+					}
 	
-				file_put_contents($log_file, $log_data);
+					$log_file = $log_dir . 'logWebhook-' . gmdate( 'Y-m-d_H-i-s' ) . '.json';
+	
+					$log_data = json_encode( [
+						'post_data'   => $post_data,
+						'returnData'  => $returnData,
+					] );
+	
+					$wp_filesystem->put_contents( $log_file, $log_data, FS_CHMOD_FILE );
+				}
 			}
+
 
 			return $returnData;
 		} catch (Throwable $error) {

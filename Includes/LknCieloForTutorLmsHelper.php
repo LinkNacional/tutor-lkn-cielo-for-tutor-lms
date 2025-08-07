@@ -8,6 +8,7 @@ class LknCieloForTutorLmsHelper{
             'name' => 'lkn-cielo-for-tutor-lms',
             'label' => 'Cielo Checkout',
             'is_installed' => true,
+            'is_plugin_active' => true,
             'is_active' => false,
             'icon' => LKN_CIELO_FOR_TUTOR_LMS_DIR_URL . '/Public/images/cieloIcon.png',
             'support_subscription' => false,

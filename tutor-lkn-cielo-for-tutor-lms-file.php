@@ -19,7 +19,7 @@ require_once __DIR__ . '/vendor/autoload.php';
 
 
 if ( ! defined('LKN_CIELO_FOR_TUTOR_LMS_VERSION')) {
-	define( 'LKN_CIELO_FOR_TUTOR_LMS_VERSION', '1.0.0' );
+	define( 'LKN_CIELO_FOR_TUTOR_LMS_VERSION', '1.0.1' );
 }
 
 if ( ! defined('LKN_CIELO_FOR_TUTOR_LMS_FILE')) {
