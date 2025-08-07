@@ -1,7 +1,7 @@
 === Cielo For Tutor LMS ===
 Contributors: linknacional
-Donate link: https://www.linknacional.com.br/wordpress/lifterlms/
-Tags: lifterlms, payment, paymethod, cielo, checkout
+Donate link: https://www.linknacional.com.br/wordpress/
+Tags: tutorlms, tutor, payment, pix, cielo
 Requires at least: 5.7
 Tested up to: 6.8
 Stable tag: 1.0.1
