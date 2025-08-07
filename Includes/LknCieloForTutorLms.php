@@ -85,10 +85,8 @@ class LknCieloForTutorLms {
 		$this->plugin_name = 'lkn-cielo-for-tutor-lms';
 
 		$this->load_dependencies();
-		$this->set_locale();
 		$this->define_admin_hooks();
 		$this->define_public_hooks();
-		$this->updater_init();
 	}
 
 	/**
@@ -97,7 +95,6 @@ class LknCieloForTutorLms {
 	 * Include the following files that make up the plugin:
 	 *
 	 * - LknCieloForTutorLmsLoader. Orchestrates the hooks of the plugin.
-	 * - LknCieloForTutorLmsi18n. Defines internationalization functionality.
 	 * - Lkn_Cielo_For_Tutor_Lms_Admin. Defines all hooks for the admin area.
 	 * - Lkn_Cielo_For_Tutor_Lms_Public. Defines all hooks for the public side of the site.
 	 *
@@ -111,23 +108,6 @@ class LknCieloForTutorLms {
 
 		$this->loader = new LknCieloForTutorLmsLoader();
 		$this->LknCieloForTutorLmsHelperClass = new LknCieloForTutorLmsHelper();
-	}
-
-	/**
-	 * Define the locale for this plugin for internationalization.
-	 *
-	 * Uses the LknCieloForTutorLmsi18n class in order to set the domain and to register the hook
-	 * with WordPress.
-	 *
-	 * @since    1.0.0
-	 * @access   private
-	 */
-	private function set_locale() {
-
-		$plugin_i18n = new LknCieloForTutorLmsi18n();
-
-		$this->loader->add_action( 'plugins_loaded', $plugin_i18n, 'load_plugin_textdomain' );
-
 	}
 
 	/**
@@ -209,21 +189,11 @@ class LknCieloForTutorLms {
 		return $this->version;
 	}
 
-	private function updater_init() {
-        include_once __DIR__ . '/plugin-updater/plugin-update-checker.php';
-
-        return new Lkn_Puc_Plugin_UpdateChecker(
-            'https://api.linknacional.com/v2/u/?slug=tutor-lkn-cielo-for-tutor-lms',
-            LKN_CIELO_FOR_TUTOR_LMS_FILE,
-            'tutor-lkn-cielo-for-tutor-lms'
-        );
-    }
-
 	public static function addSettings($plugin_meta, $plugin_file) {
         $new_meta_links['setting'] = sprintf(
             '<a href="%1$s">%2$s</a>',
             admin_url('admin.php?page=tutor_settings&tab_page=ecommerce_payment'),
-            __('Settings', 'woocommerce')
+            __('Configurações', 'tutor-lkn-cielo-for-tutor-lms')
         );
 
         return array_merge($plugin_meta, $new_meta_links);
