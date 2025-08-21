@@ -1,8 +1,8 @@
 <?php
 
-namespace Lkn\lknCieloForTutorLms\Includes;
+namespace Lkncftl\lknCieloForTutorLms\Includes;
 
-class LknCieloForTutorLmsHelper{
+class LkncftlCieloForTutorLmsHelper{
     public function setConfigs($methods) {
         $custom_payment_method = array(
             'name' => 'lkn-cielo-for-tutor-lms',
@@ -10,7 +10,7 @@ class LknCieloForTutorLmsHelper{
             'is_installed' => true,
             'is_plugin_active' => true,
             'is_active' => false,
-            'icon' => LKN_CIELO_FOR_TUTOR_LMS_DIR_URL . '/Public/images/cieloIcon.png',
+            'icon' => LKNCFTLCIELO_FOR_TUTOR_LMS_DIR_URL . '/Public/images/cieloIcon.png',
             'support_subscription' => false,
             'fields' => array(
                 array(
@@ -45,8 +45,8 @@ class LknCieloForTutorLmsHelper{
     public function addGateway($gateways) {
         $arr = array(
             'lkn-cielo-for-tutor-lms' => array(
-                'gateway_class' => LknCieloForTutorLmsGatewayBase::class,
-                'config_class' => LknCieloForTutorLmsGatewayConfig::class,
+                'gateway_class' => LkncftlCieloForTutorLmsGatewayBase::class,
+                'config_class' => LkncftlCieloForTutorLmsGatewayConfig::class,
             ),
         );
 
@@ -58,8 +58,8 @@ class LknCieloForTutorLmsHelper{
     public function addWebhook($value, $gateway) {
         $arr = array(
             'lkn-cielo-for-tutor-lms' => array(
-                'gateway_class' => LknCieloForTutorLmsGatewayBase::class,
-                'config_class' => LknCieloForTutorLmsGatewayConfig::class,
+                'gateway_class' => LkncftlCieloForTutorLmsGatewayBase::class,
+                'config_class' => LkncftlCieloForTutorLmsGatewayConfig::class,
             ),
         );
 
@@ -93,7 +93,7 @@ class LknCieloForTutorLmsHelper{
     }
 
     final public static function get_exchange_rates($currencyCode) {
-        $cotacao = LknCieloForTutorLmsHelper::get_contents('https://api.linknacional.com/cotacao/cotacao-' . $currencyCode . '.json');
+        $cotacao = LkncftlCieloForTutorLmsHelper::get_contents('https://api.linknacional.com/cotacao/cotacao-' . $currencyCode . '.json');
 
         $cotacao = json_decode($cotacao, true);
 
@@ -102,5 +102,39 @@ class LknCieloForTutorLmsHelper{
         }
 
         return 1;
+    }
+
+    /**
+     * Cria a pasta de logs de forma segura no diretório de uploads
+     * 
+     * @return string Caminho para a pasta de logs
+     */
+    public static function createSecureLogDirectory() {
+        global $wp_filesystem;
+
+        if ( ! function_exists( 'request_filesystem_credentials' ) ) {
+            require_once \ABSPATH . 'wp-admin/includes/file.php';
+        }
+
+        $creds = \request_filesystem_credentials( '', '', false, false, null );
+        if ( \WP_Filesystem( $creds ) && ! ( false === $creds ) ) {
+            $upload_dir = \wp_upload_dir();
+            $log_dir = $upload_dir['basedir'] . '/cielo-for-tutor-lms-logs/';
+
+            if ( ! $wp_filesystem->is_dir( $log_dir ) ) {
+                $wp_filesystem->mkdir( $log_dir );
+                
+                // Cria arquivo .htaccess para proteger os logs
+                $htaccess_content = "Order Deny,Allow\nDeny from all\n";
+                $wp_filesystem->put_contents( $log_dir . '.htaccess', $htaccess_content, \FS_CHMOD_FILE );
+                
+                // Cria arquivo index.php vazio para maior segurança
+                $wp_filesystem->put_contents( $log_dir . 'index.php', '<?php // Silence is golden', \FS_CHMOD_FILE );
+            }
+
+            return $log_dir;
+        }
+
+        return false;
     }
 }

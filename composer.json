@@ -4,9 +4,9 @@
     "license": "Proprietary",
     "autoload": {
         "psr-4": {
-            "Lkn\\lknCieloForTutorLms\\Includes\\": "Includes/",
-            "Lkn\\lknCieloForTutorLms\\Admin\\": "Admin/",
-            "Lkn\\lknCieloForTutorLms\\PublicView\\": "Public/"
+            "Lkncftl\\lknCieloForTutorLms\\Includes\\": "Includes/",
+            "Lkncftl\\lknCieloForTutorLms\\Admin\\": "Admin/",
+            "Lkncftl\\lknCieloForTutorLms\\PublicView\\": "Public/"
         }
     },
     "authors": [

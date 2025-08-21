@@ -1,13 +1,13 @@
 <?php
 
-namespace Lkn\lknCieloForTutorLms\Includes;
+namespace Lkncftl\lknCieloForTutorLms\Includes;
 
 use Ollyo\PaymentHub\Contracts\Payment\ConfigContract;
 use Tutor\PaymentGateways\Configs\PaymentUrlsTrait;
 use Ollyo\PaymentHub\Payments\Paypal\Config;
 use Tutor\Ecommerce\Settings;
 
-class LknCieloForTutorLmsGatewayConfig extends Config implements ConfigContract {
+class LkncftlCieloForTutorLmsGatewayConfig extends Config implements ConfigContract {
 	/**
 	 * This trait provides methods to retrieve the URLs used in the payment process for success, cancellation, and webhook 
 	 * notifications. It includes functionality for retrieving dynamic URLs based on the current environment (e.g., 

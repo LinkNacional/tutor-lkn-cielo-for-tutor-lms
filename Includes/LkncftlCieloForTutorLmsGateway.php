@@ -1,6 +1,6 @@
 <?php
 
-namespace Lkn\lknCieloForTutorLms\Includes;
+namespace Lkncftl\lknCieloForTutorLms\Includes;
 
 use Throwable;
 use ErrorException;
@@ -9,7 +9,7 @@ use Ollyo\PaymentHub\Core\Support\System;
 use GuzzleHttp\Exception\RequestException;
 use Ollyo\PaymentHub\Core\Payment\BasePayment;
 
-class LknCieloForTutorLmsGateway extends BasePayment
+class LkncftlCieloForTutorLmsGateway extends BasePayment
 {
 
 	protected $client;
@@ -118,7 +118,7 @@ class LknCieloForTutorLmsGateway extends BasePayment
 			$currencyCode = $this->data->currency->code;
 
 			if ('BRL' !== $currencyCode) {
-                $exRate = LknCieloForTutorLmsHelper::get_exchange_rates($currencyCode);
+                $exRate = LkncftlCieloForTutorLmsHelper::get_exchange_rates($currencyCode);
                 $totalPrice = ($totalPrice / 100) * $exRate;
 				$totalPrice = round($totalPrice * 100);
             }
@@ -162,29 +162,21 @@ class LknCieloForTutorLmsGateway extends BasePayment
 			);
 
 			if ( $this->config->get( 'reg_logs' ) === 'enabled' ) {
-				global $wp_filesystem;
+				$log_dir = LkncftlCieloForTutorLmsHelper::createSecureLogDirectory();
+				
+				if ( $log_dir ) {
+					global $wp_filesystem;
 
-				if ( ! function_exists( 'request_filesystem_credentials' ) ) {
-					require_once ABSPATH . 'wp-admin/includes/file.php';
-				}
-
-				if ( WP_Filesystem( $creds ) && ! ( false === ( $creds = request_filesystem_credentials( '', '', false, false, null ) ) ) ) {
-					$log_dir = __DIR__ . '/logs/';
+					$log_file = $log_dir . 'logCreatePayment-' . \gmdate( 'Y-m-d_H-i-s' ) . '.json';
 	
-					if ( ! $wp_filesystem->is_dir( $log_dir ) ) {
-						$wp_filesystem->mkdir( $log_dir );
-					}
-	
-					$log_file = $log_dir . 'logCreatePayment-' . gmdate( 'Y-m-d_H-i-s' ) . '.json';
-	
-					$log_data = json_encode( [
+					$log_data = \json_encode( [
 						'url'     => 'https://cieloecommerce.cielo.com.br/api/public/v1/orders/',
 						'headers' => $headers,
 						'body'    => $body,
 						'result'  => $result,
 					] );
 	
-					$wp_filesystem->put_contents( $log_file, $log_data, FS_CHMOD_FILE );
+					$wp_filesystem->put_contents( $log_file, $log_data, \FS_CHMOD_FILE );
 				}
 			}
 
@@ -252,27 +244,19 @@ class LknCieloForTutorLmsGateway extends BasePayment
 			}
 
 			if ( $this->config->get( 'reg_logs' ) === 'enabled' ) {
-				global $wp_filesystem;
+				$log_dir = LkncftlCieloForTutorLmsHelper::createSecureLogDirectory();
+				
+				if ( $log_dir ) {
+					global $wp_filesystem;
 
-				if ( ! function_exists( 'request_filesystem_credentials' ) ) {
-					require_once ABSPATH . 'wp-admin/includes/file.php';
-				}
-
-				if ( WP_Filesystem( $creds ) && ! ( false === ( $creds = request_filesystem_credentials( '', '', false, false, null ) ) ) ) {
-					$log_dir = __DIR__ . '/logs/';
+					$log_file = $log_dir . 'logWebhook-' . \gmdate( 'Y-m-d_H-i-s' ) . '.json';
 	
-					if ( ! $wp_filesystem->is_dir( $log_dir ) ) {
-						$wp_filesystem->mkdir( $log_dir );
-					}
-	
-					$log_file = $log_dir . 'logWebhook-' . gmdate( 'Y-m-d_H-i-s' ) . '.json';
-	
-					$log_data = json_encode( [
+					$log_data = \json_encode( [
 						'post_data'   => $post_data,
 						'returnData'  => $returnData,
 					] );
 	
-					$wp_filesystem->put_contents( $log_file, $log_data, FS_CHMOD_FILE );
+					$wp_filesystem->put_contents( $log_file, $log_data, \FS_CHMOD_FILE );
 				}
 			}
 

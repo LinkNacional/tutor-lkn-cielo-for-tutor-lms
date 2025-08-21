@@ -6,9 +6,9 @@
  * Rename this for your plugin and update it as you release new versions.
  */
 
-use Lkn\lknCieloForTutorLms\Includes\LknCieloForTutorLms;
-use Lkn\lknCieloForTutorLms\Includes\LknCieloForTutorLmsActivator;
-use Lkn\lknCieloForTutorLms\Includes\LknCieloForTutorLmsDeactivator;
+use Lkncftl\lknCieloForTutorLms\Includes\LkncftlCieloForTutorLms;
+use Lkncftl\lknCieloForTutorLms\Includes\LkncftlCieloForTutorLmsActivator;
+use Lkncftl\lknCieloForTutorLms\Includes\LkncftlCieloForTutorLmsDeactivator;
 
 // If this file is called directly, abort.
 if (! defined('WPINC')) {
@@ -18,44 +18,44 @@ if (! defined('WPINC')) {
 require_once __DIR__ . '/vendor/autoload.php';
 
 
-if ( ! defined('LKN_CIELO_FOR_TUTOR_LMS_VERSION')) {
-	define( 'LKN_CIELO_FOR_TUTOR_LMS_VERSION', '1.0.1' );
+if ( ! defined('LKNCFTLCIELO_FOR_TUTOR_LMS_VERSION')) {
+	define( 'LKNCFTLCIELO_FOR_TUTOR_LMS_VERSION', '1.0.2' );
 }
 
-if ( ! defined('LKN_CIELO_FOR_TUTOR_LMS_FILE')) {
-    define('LKN_CIELO_FOR_TUTOR_LMS_FILE', __DIR__ . '/tutor-lkn-cielo-for-tutor-lms.php');
+if ( ! defined('LKNCFTLCIELO_FOR_TUTOR_LMS_FILE')) {
+    define('LKNCFTLCIELO_FOR_TUTOR_LMS_FILE', __DIR__ . '/tutor-lkn-cielo-for-tutor-lms.php');
 }
 
-if ( ! defined('LKN_CIELO_FOR_TUTOR_LMS_DIR')) {
-    define('LKN_CIELO_FOR_TUTOR_LMS_DIR', plugin_dir_path(LKN_CIELO_FOR_TUTOR_LMS_FILE));
+if ( ! defined('LKNCFTLCIELO_FOR_TUTOR_LMS_DIR')) {
+    define('LKNCFTLCIELO_FOR_TUTOR_LMS_DIR', plugin_dir_path(LKNCFTLCIELO_FOR_TUTOR_LMS_FILE));
 }
 
-if ( ! defined('LKN_CIELO_FOR_TUTOR_LMS_DIR_URL')) {
-    define('LKN_CIELO_FOR_TUTOR_LMS_DIR_URL', plugin_dir_url(LKN_CIELO_FOR_TUTOR_LMS_FILE));
+if ( ! defined('LKNCFTLCIELO_FOR_TUTOR_LMS_DIR_URL')) {
+    define('LKNCFTLCIELO_FOR_TUTOR_LMS_DIR_URL', plugin_dir_url(LKNCFTLCIELO_FOR_TUTOR_LMS_FILE));
 }
 
-if ( ! defined('LKN_CIELO_FOR_TUTOR_LMS_BASENAME')) {
-    define('LKN_CIELO_FOR_TUTOR_LMS_BASENAME', plugin_basename(LKN_CIELO_FOR_TUTOR_LMS_FILE));
+if ( ! defined('LKNCFTLCIELO_FOR_TUTOR_LMS_BASENAME')) {
+    define('LKNCFTLCIELO_FOR_TUTOR_LMS_BASENAME', plugin_basename(LKNCFTLCIELO_FOR_TUTOR_LMS_FILE));
 }
 
 /**
  * The code that runs during plugin activation.
  * This action is documented in includes/class-lkn-cielo-for-tutor-lms-activator.php
  */
-function activateLknCieloForTutorLms() {
-	LknCieloForTutorLmsActivator::activate();
+function activateLkncftlCieloForTutorLms() {
+	LkncftlCieloForTutorLmsActivator::activate();
 }
 
 /**
  * The code that runs during plugin deactivation.
  * This action is documented in includes/class-lkn-cielo-for-tutor-lms-deactivator.php
  */
-function deactivateLknCieloForTutorLms() {
-	LknCieloForTutorLmsDeactivator::deactivate();
+function deactivateLkncftlCieloForTutorLms() {
+	LkncftlCieloForTutorLmsDeactivator::deactivate();
 }
 
-register_activation_hook( __FILE__, 'activateLknCieloForTutorLms' );
-register_deactivation_hook( __FILE__, 'deactivateLknCieloForTutorLms' );
+register_activation_hook( __FILE__, 'activateLkncftlCieloForTutorLms' );
+register_deactivation_hook( __FILE__, 'deactivateLkncftlCieloForTutorLms' );
 
 /**
  * Begins execution of the plugin.
@@ -66,10 +66,10 @@ register_deactivation_hook( __FILE__, 'deactivateLknCieloForTutorLms' );
  *
  * @since    1.0.0
  */
-function runLknCieloForTutorLms() {
+function runLkncftlCieloForTutorLms() {
 
-	$plugin = new LknCieloForTutorLms();
+	$plugin = new LkncftlCieloForTutorLms();
 	$plugin->run();
 
 }
-runLknCieloForTutorLms();
+runLkncftlCieloForTutorLms();

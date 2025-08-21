@@ -16,12 +16,12 @@
  * Plugin Name:       Cielo For Tutor Lms
  * Plugin URI:        https://linknacional.com.br/wordpress
  * Description:       This is a description of the plugin.
- * Version:           1.0.1
+ * Version:           1.0.2
  * Author:            Link Nacional
  * Author URI:        https://linknacional.com.br/
  * License:           GPL-3.0+
  * License URI:       http://www.gnu.org/licenses/gpl-2.0.txt
- * Text Domain:       tutor-lkn-cielo-for-tutor-lms
+ * Text Domain:       cielo-for-tutor-lms
  * Requires Plugins:  tutor
  * Domain Path:       /languages
  */
