@@ -4,7 +4,7 @@ Donate link: https://www.linknacional.com.br/wordpress/
 Tags: tutorlms, tutor, payment, pix, cielo
 Requires at least: 5.7
 Tested up to: 6.8
-Stable tag: 1.0.1
+Stable tag: 1.0.2
 Requires PHP: 7.2
 License: GPLv3 or later
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
@@ -72,6 +72,9 @@ This plugin uses the Cielo API 3.0 to process payments. [terms of service](https
 * Currently, this plugin supports one-time payments for course enrollment. Recurring payment features may be available in future versions.
 
 == Changelog ==
+= 1.0.1 =
+** 21/08/2025**
+* Correção em erros encontrados pelo wordpress.
 
 = 1.0.1 =
 ** 07/08/2025**
@@ -81,6 +84,8 @@ This plugin uses the Cielo API 3.0 to process payments. [terms of service](https
 * Plugin launch.
 
 == Upgrade Notice ==
+= 1.0.1 =
+* Correção em erros encontrados pelo wordpress.
 
 = 1.0.1 =
 * Remoção do plugin updater.

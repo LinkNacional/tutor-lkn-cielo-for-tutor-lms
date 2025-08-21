@@ -8,7 +8,7 @@ on:
 env:
   PLUGIN_NAME: tutor-lkn-cielo-for-tutor-lms
   PHP_VERSION: "7.4"
-  DEPLOY_TAG: "1.0.1"
+  DEPLOY_TAG: "1.0.2"
 
 jobs:
   release-build:
@@ -55,7 +55,7 @@ jobs:
       run: |
         mkdir -p dist
         mkdir -p build/${{ env.PLUGIN_NAME }}
-        mv ./Admin ./Includes ./languages ./Public *.php *.txt ./build/${{ env.PLUGIN_NAME }}
+        mv ./Admin ./Includes ./languages ./composer.json ./composer.lock ./Public *.php *.txt ./build/${{ env.PLUGIN_NAME }}
         cp -r vendor ./build/${{ env.PLUGIN_NAME }}/vendor
         find ./build -type f -exec chmod 0644 {} +
         find ./build -type d -exec chmod 0755 {} +
