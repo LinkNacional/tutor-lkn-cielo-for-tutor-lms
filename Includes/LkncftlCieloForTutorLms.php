@@ -9,8 +9,8 @@
  * @link       https://linknacional.com.br
  * @since      1.0.0
  *
- * @package    LknCieloForTutorLms
- * @subpackage LknCieloForTutorLms/includes
+ * @package    LkncftlCieloForTutorLms
+ * @subpackage LkncftlCieloForTutorLms/includes
  */
 
 /**
@@ -23,18 +23,18 @@
  * version of the plugin.
  *
  * @since      1.0.0
- * @package    LknCieloForTutorLms
- * @subpackage LknCieloForTutorLms/includes
+ * @package    LkncftlCieloForTutorLms
+ * @subpackage LkncftlCieloForTutorLms/includes
  * @author     Link Nacional <contato@linknacional.com>
  */
-namespace Lkn\lknCieloForTutorLms\Includes;
+namespace Lkncftl\lknCieloForTutorLms\Includes;
 
-use Lkn\lknCieloForTutorLms\Admin\LknCieloForTutorLmsAdmin;
-use Lkn\lknCieloForTutorLms\PublicView\LknCieloForTutorLmsPublic;
+use Lkncftl\lknCieloForTutorLms\Admin\LkncftlCieloForTutorLmsAdmin;
+use Lkncftl\lknCieloForTutorLms\PublicView\LkncftlCieloForTutorLmsPublic;
 use Lkn_Puc_Plugin_UpdateChecker;
-use Payments\Custom\LknCieloForTutorLmsGateway;
+use Payments\Custom\LkncftlCieloForTutorLmsGateway;
 
-class LknCieloForTutorLms {
+class LkncftlCieloForTutorLms {
 
 	/**
 	 * The loader that's responsible for maintaining and registering all hooks that power
@@ -42,7 +42,7 @@ class LknCieloForTutorLms {
 	 *
 	 * @since    1.0.0
 	 * @access   protected
-	 * @var      LknCieloForTutorLmsLoader    $loader    Maintains and registers all hooks for the plugin.
+	 * @var      LkncftlCieloForTutorLmsLoader    $loader    Maintains and registers all hooks for the plugin.
 	 */
 	protected $loader;
 
@@ -74,11 +74,11 @@ class LknCieloForTutorLms {
 	 * @since    1.0.0
 	 */
 
-	public $LknCieloForTutorLmsHelperClass;
+	public $LkncftlCieloForTutorLmsHelperClass;
 
 	public function __construct() {
-		if ( defined( 'LKN_CIELO_FOR_TUTOR_LMS_VERSION' ) ) {
-			$this->version = LKN_CIELO_FOR_TUTOR_LMS_VERSION;
+		if ( defined( 'LKNCFTLCIELO_FOR_TUTOR_LMS_VERSION' ) ) {
+			$this->version = LKNCFTLCIELO_FOR_TUTOR_LMS_VERSION;
 		} else {
 			$this->version = '1.0.0';
 		}
@@ -94,7 +94,7 @@ class LknCieloForTutorLms {
 	 *
 	 * Include the following files that make up the plugin:
 	 *
-	 * - LknCieloForTutorLmsLoader. Orchestrates the hooks of the plugin.
+	 * - LkncftlCieloForTutorLmsLoader. Orchestrates the hooks of the plugin.
 	 * - Lkn_Cielo_For_Tutor_Lms_Admin. Defines all hooks for the admin area.
 	 * - Lkn_Cielo_For_Tutor_Lms_Public. Defines all hooks for the public side of the site.
 	 *
@@ -106,8 +106,8 @@ class LknCieloForTutorLms {
 	 */
 	private function load_dependencies() {
 
-		$this->loader = new LknCieloForTutorLmsLoader();
-		$this->LknCieloForTutorLmsHelperClass = new LknCieloForTutorLmsHelper();
+		$this->loader = new LkncftlCieloForTutorLmsLoader();
+		$this->LkncftlCieloForTutorLmsHelperClass = new LkncftlCieloForTutorLmsHelper();
 	}
 
 	/**
@@ -119,11 +119,11 @@ class LknCieloForTutorLms {
 	 */
 	private function define_admin_hooks() {
 
-		$plugin_admin = new LknCieloForTutorLmsAdmin( $this->get_plugin_name(), $this->get_version() );
+		$plugin_admin = new LkncftlCieloForTutorLmsAdmin( $this->get_plugin_name(), $this->get_version() );
 
 		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_styles' );
 		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_scripts' );
-        $this->loader->add_filter( 'plugin_action_links_' . LKN_CIELO_FOR_TUTOR_LMS_BASENAME, $this, 'addSettings', 10, 2);
+        $this->loader->add_filter( 'plugin_action_links_' . LKNCFTLCIELO_FOR_TUTOR_LMS_BASENAME, $this, 'addSettings', 10, 2);
         
 		
 		
@@ -139,14 +139,14 @@ class LknCieloForTutorLms {
 	private function define_public_hooks() {
 
 		
-		$plugin_public = new LknCieloForTutorLmsPublic( $this->get_plugin_name(), $this->get_version() );
+		$plugin_public = new LkncftlCieloForTutorLmsPublic( $this->get_plugin_name(), $this->get_version() );
 		
 		$this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'enqueue_styles' );
 		$this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'enqueue_scripts' );
 		
-		$this->loader->add_filter( 'tutor_gateways_with_class', $this->LknCieloForTutorLmsHelperClass, 'addWebhook', 10, 2);
-		$this->loader->add_filter( 'tutor_payment_gateways_with_class', $this->LknCieloForTutorLmsHelperClass, 'addGateway');
-		$this->loader->add_filter( 'tutor_payment_gateways', $this->LknCieloForTutorLmsHelperClass, 'setConfigs');
+		$this->loader->add_filter( 'tutor_gateways_with_class', $this->LkncftlCieloForTutorLmsHelperClass, 'addWebhook', 10, 2);
+		$this->loader->add_filter( 'tutor_payment_gateways_with_class', $this->LkncftlCieloForTutorLmsHelperClass, 'addGateway');
+		$this->loader->add_filter( 'tutor_payment_gateways', $this->LkncftlCieloForTutorLmsHelperClass, 'setConfigs');
 	}
 
 	/**
@@ -173,7 +173,7 @@ class LknCieloForTutorLms {
 	 * The reference to the class that orchestrates the hooks with the plugin.
 	 *
 	 * @since     1.0.0
-	 * @return    LknCieloForTutorLmsLoader    Orchestrates the hooks of the plugin.
+	 * @return    LkncftlCieloForTutorLmsLoader    Orchestrates the hooks of the plugin.
 	 */
 	public function get_loader() {
 		return $this->loader;
@@ -193,7 +193,7 @@ class LknCieloForTutorLms {
         $new_meta_links['setting'] = sprintf(
             '<a href="%1$s">%2$s</a>',
             admin_url('admin.php?page=tutor_settings&tab_page=ecommerce_payment'),
-            __('Configurações', 'tutor-lkn-cielo-for-tutor-lms')
+            __('Configurações', 'cielo-for-tutor-lms')
         );
 
         return array_merge($plugin_meta, $new_meta_links);

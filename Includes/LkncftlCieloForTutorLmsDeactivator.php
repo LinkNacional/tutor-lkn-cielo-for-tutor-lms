@@ -6,8 +6,8 @@
  * @link       https://linknacional.com.br
  * @since      1.0.0
  *
- * @package    LknCieloForTutorLms
- * @subpackage LknCieloForTutorLms/includes
+ * @package    LkncftlCieloForTutorLms
+ * @subpackage LkncftlCieloForTutorLms/includes
  */
 
 /**
@@ -16,14 +16,14 @@
  * This class defines all code necessary to run during the plugin's deactivation.
  *
  * @since      1.0.0
- * @package    LknCieloForTutorLms
- * @subpackage LknCieloForTutorLms/includes
+ * @package    LkncftlCieloForTutorLms
+ * @subpackage LkncftlCieloForTutorLms/includes
  * @author     Link Nacional <contato@linknacional.com>
  */
 
-namespace Lkn\lknCieloForTutorLms\Includes;
+namespace Lkncftl\lknCieloForTutorLms\Includes;
 
-class LknCieloForTutorLmsDeactivator {
+class LkncftlCieloForTutorLmsDeactivator {
 
 	/**
 	 * Short Description. (use period)

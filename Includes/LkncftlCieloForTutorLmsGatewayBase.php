@@ -1,16 +1,16 @@
 <?php
 
-namespace Lkn\lknCieloForTutorLms\Includes;
+namespace Lkncftl\lknCieloForTutorLms\Includes;
 
 use Tutor\PaymentGateways\GatewayBase;
 
-class LknCieloForTutorLmsGatewayBase extends GatewayBase {
+class LkncftlCieloForTutorLmsGatewayBase extends GatewayBase {
 	
 	private $dir_name = 'lkn-cielo-for-tutor-lms';
 
-	private $config_class = LknCieloForTutorLmsGatewayConfig::class;
+	private $config_class = LkncftlCieloForTutorLmsGatewayConfig::class;
 
-	private $payment_class = LknCieloForTutorLmsGateway::class;
+	private $payment_class = LkncftlCieloForTutorLmsGateway::class;
 
 	public function get_root_dir_name():string {
 		return $this->dir_name;
@@ -25,6 +25,6 @@ class LknCieloForTutorLmsGatewayBase extends GatewayBase {
 	}
 
 	public static function get_autoload_file() {
-		return [LKN_CIELO_FOR_TUTOR_LMS_DIR . 'vendor/autoload.php'];
+		return [LKNCFTLCIELO_FOR_TUTOR_LMS_DIR . 'vendor/autoload.php'];
 	}
 }

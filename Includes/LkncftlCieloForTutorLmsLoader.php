@@ -6,8 +6,8 @@
  * @link       https://linknacional.com.br
  * @since      1.0.0
  *
- * @package    LknCieloForTutorLms
- * @subpackage LknCieloForTutorLms/includes
+ * @package    LkncftlCieloForTutorLms
+ * @subpackage LkncftlCieloForTutorLms/includes
  */
 
 /**
@@ -17,14 +17,14 @@
  * the plugin, and register them with the WordPress API. Call the
  * run function to execute the list of actions and filters.
  *
- * @package    LknCieloForTutorLms
- * @subpackage LknCieloForTutorLms/includes
+ * @package    LkncftlCieloForTutorLms
+ * @subpackage LkncftlCieloForTutorLms/includes
  * @author     Link Nacional <contato@linknacional.com>
  */
 
-namespace Lkn\lknCieloForTutorLms\Includes;
+namespace Lkncftl\lknCieloForTutorLms\Includes;
 
-class LknCieloForTutorLmsLoader {
+class LkncftlCieloForTutorLmsLoader {
 
 	/**
 	 * The array of actions registered with WordPress.
