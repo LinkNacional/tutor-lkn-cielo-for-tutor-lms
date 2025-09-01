@@ -38,7 +38,7 @@ jobs:
         uses: 10up/action-wordpress-plugin-deploy@stable
         env:
           VERSION: ${{ env.DEPLOY_TAG }}
-          SLUG: tutor-lkn-cielo-for-tutor-lms
+          SLUG: cielo-for-tutor-lms
           SVN_PASSWORD: ${{ secrets.SVN_PASSWORD }}
           SVN_USERNAME: ${{ secrets.SVN_USERNAME }}
           ASSETS_DIR: build/${{ env.PLUGIN_NAME }}/Includes/wordpressAssets
