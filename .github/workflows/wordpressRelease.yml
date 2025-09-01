@@ -6,7 +6,7 @@ on:
 env:
   PLUGIN_NAME: tutor-lkn-cielo-for-tutor-lms
   PHP_VERSION: "7.4"
-  DEPLOY_TAG: "1.0.2"
+  DEPLOY_TAG: "1.0.3"
 
 jobs:
   deploy-to-wp:
