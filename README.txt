@@ -1,19 +1,19 @@
 === Cielo For Tutor Lms ===
 Contributors: linknacional
 Donate link: https://www.linknacional.com.br/wordpress/
-Tags: tutorlms, tutor, payment, pix, cielo
+Tags: tutor, boleto, pix, cartao, cielo
 Requires at least: 5.7
 Tested up to: 6.8
-Stable tag: 1.0.2
+Stable tag: 1.0.3
 Requires PHP: 7.2
 License: GPLv3 or later
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
-Payment Gateway for Cielo API on Tutor LMS.
+Payment Gateway for Cielo on Tutor LMS.
 
 == Description ==
 
-The **Cielo Payment Gateway for Tutor LMS** is a payment plugin that allows you to integrate your online learning platform with Cielo, one of Brazil's leading payment solutions. With this plugin, you can offer your students the ability to pay for courses using **Cielo Checkout**, ensuring secure and fast transactions.
+The **Cielo Payment Gateway for Tutor LMS** is a payment plugin that allows you to integrate [WordPress](https://www.linknacional.com.br/wordpress/) learning platform with Cielo Checkout very easy, one of Brazil's leading payment solutions. With this plugin, you can offer your students the ability to pay for courses using **Cielo Checkout**, ensuring secure and fast transactions for Boleto bancário, credit card or PIX.
 
 **Main Features:**
 - Integration with **Cielo Checkout** for secure payment processing;
@@ -22,9 +22,9 @@ The **Cielo Payment Gateway for Tutor LMS** is a payment plugin that allows you 
 
 **Dependencies**
 
-Cielo Payment Gateway for Tutor LMS plugin is dependent on [Tutor LMS](https://www.linknacional.com.br/wordpress/lifterlms/) plugin, please make sure Tutor LMS is installed and properly configured before starting Cielo Payment Gateway for Tutor LMS installation.
+Cielo Payment Gateway for Tutor LMS plugin is dependent on [Tutor LMS](https://wordpress.org/plugins/tutor/) [plugin](https://www.linknacional.com.br/wordpress/plugins/), please make sure Tutor LMS is installed and properly configured before starting Cielo Payment Gateway for Tutor LMS installation.
 
-This plugin uses the Cielo API 3.0 to process payments. [terms of service](https://www.cielo.com.br/termos-condicoes-de-uso/) and [privacy policy](https://ri.cielo.com.br/estatuto-social-e-politicas-old/politica-de-privacidade-de-dados/).
+This plugin uses the Cielo Checkout to process payments. [terms of service](https://www.cielo.com.br/termos-condicoes-de-uso/) and [privacy policy](https://ri.cielo.com.br/estatuto-social-e-politicas-old/politica-de-privacidade-de-dados/).
 
 **User instructions**
 
@@ -65,14 +65,18 @@ This plugin uses the Cielo API 3.0 to process payments. [terms of service](https
 = What is needed to use this plugin? =
 
 * Tutor LMS version 3.0 or later installed and active;
-* Cielo API 3.0 credentials.
+* Cielo Checkout credentials.
 
 = Does this plugin support recurring payments for course subscriptions? =
 
 * Currently, this plugin supports one-time payments for course enrollment. Recurring payment features may be available in future versions.
 
 == Changelog ==
-= 1.0.1 =
+= 1.0.3 =
+** 01/09/2025**
+* Alteração no arquivo readme.
+
+= 1.0.2 =
 ** 21/08/2025**
 * Correção em erros encontrados pelo wordpress.
 
@@ -84,7 +88,7 @@ This plugin uses the Cielo API 3.0 to process payments. [terms of service](https
 * Plugin launch.
 
 == Upgrade Notice ==
-= 1.0.1 =
+= 1.0.2 =
 * Correção em erros encontrados pelo wordpress.
 
 = 1.0.1 =
