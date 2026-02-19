@@ -1,3 +1,6 @@
+# 1.0.4 - 19/02/2026
+* Adição de ícones e imagens do plugin.
+
 # 1.0.3 - 01/09/2025
 * Alteração no arquivo readme.
 
