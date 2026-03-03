@@ -72,6 +72,10 @@ This plugin uses the Cielo Checkout to process payments. [terms of service](http
 * Currently, this plugin supports one-time payments for course enrollment. Recurring payment features may be available in future versions.
 
 == Changelog ==
+= 1.0.5 =
+** 03/03/2026**
+* Updated plugin images for better clarity and branding in the WordPress directory.
+
 = 1.0.4 =
 ** 19/02/2026**
 * Adding plugin icons and images.
