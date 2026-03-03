@@ -4,7 +4,7 @@ Donate link: https://www.linknacional.com.br/wordpress/
 Tags: tutor, boleto, pix, cartao, cielo
 Requires at least: 5.7
 Tested up to: 6.8
-Stable tag: 1.0.4
+Stable tag: 1.0.5
 Requires PHP: 7.2
 License: GPLv3 or later
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
@@ -72,6 +72,10 @@ This plugin uses the Cielo Checkout to process payments. [terms of service](http
 * Currently, this plugin supports one-time payments for course enrollment. Recurring payment features may be available in future versions.
 
 == Changelog ==
+= 1.0.5 =
+** 03/03/2026**
+* Updated plugin images for better clarity and branding in the WordPress directory.
+
 = 1.0.4 =
 ** 19/02/2026**
 * Adding plugin icons and images.
