@@ -1,3 +1,6 @@
+# 1.0.5 - 03/03/2026
+* Atualizado as imagens do plugin para maior clareza e melhor identidade visual no diretório do WordPress.
+
 # 1.0.4 - 19/02/2026
 * Adição de ícones e imagens do plugin.
 
